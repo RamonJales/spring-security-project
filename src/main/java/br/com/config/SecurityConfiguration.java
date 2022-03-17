@@ -23,7 +23,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests()
 			.antMatchers("/index").access("hasAnyAuthority('USERS', 'ADMIN')")
 			.antMatchers("/private-page").access("hasAuthority('ADMIN')")
-			.anyRequest().authenticated().and().formLogin()
+			.anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll()
 			.and()
 			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 			.logoutSuccessUrl("/login").permitAll();
