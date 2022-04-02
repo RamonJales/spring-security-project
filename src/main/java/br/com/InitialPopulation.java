@@ -2,20 +2,23 @@ package br.com;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Import;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.entities.UserEntity;
 import br.com.enuns.Role;
-import br.com.repository.UserEntityRepository;
+import br.com.service.UserEntityService;
+import br.com.service.impl.UserEntityServiceImpl;
 
 @Component
 @Transactional
+@Import(UserEntityServiceImpl.class)
 public class InitialPopulation implements CommandLineRunner{
 	
 	@Autowired
-	private UserEntityRepository userEntityRepository;
+	private UserEntityService userEntityService;
 	
 	@Autowired
 	private PasswordEncoder enconder;
@@ -38,11 +41,11 @@ public class InitialPopulation implements CommandLineRunner{
 		u3.setPassword(enconder.encode("789"));
 		u3.setRole(Role.USER.getName());
 		
-		userEntityRepository.save(u1);
-		userEntityRepository.save(u2);
-		userEntityRepository.save(u3);
+		userEntityService.save(u1);
+		userEntityService.save(u2);
+		userEntityService.save(u3);
 		
-		for (UserEntity user : userEntityRepository.findAll()) {
+		for (UserEntity user : userEntityService.findAll()) {
 			System.out.println(user);
 		}
 	}

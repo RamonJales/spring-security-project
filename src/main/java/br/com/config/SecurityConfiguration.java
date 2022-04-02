@@ -13,8 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration // Tells spring that this class is configuration
-@EnableWebSecurity // Tells spring that this class not only contains configurations, it also
-					// contains configurations for web
+@EnableWebSecurity // Tells spring that this class not only contains configurations, it also contains configurations for web
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
